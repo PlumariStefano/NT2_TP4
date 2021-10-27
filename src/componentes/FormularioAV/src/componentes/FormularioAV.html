@@ -1,0 +1,113 @@
+
+<section class="src-componentes-formulario-av">
+  <div class="jumbotron">
+    <h2>Formulario</h2>
+    <hr>
+    <br>
+
+    <vue-form :state="formState" @submit.prevent="enviar()">
+
+      <!-- Campo nombre -->
+      <validate tag="div">
+        <label for="nombre">Nombre</label>
+        <input 
+          placeholder="Ingrese su nombre"
+          type="text"
+          id="nombre"
+          v-model="formData.nombre"
+          name="nombre" 
+          class="form-control"
+          autocomplete="off"
+          required 
+          :minlength="nombreMinLength"
+          :maxlength="nombreMaxLength"
+        />
+        <!-- Mensajes de validación del campo nombre -->
+        <field-messages name="nombre" show="$dirty">
+          <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
+          <div slot="minlength" class="alert alert-danger mt-1">
+            Este campo debe poseer al menos {{ nombreMinLength }} caracteres
+          </div>
+          <div v-if="formData.nombre.length == nombreMaxLength" class="alert alert-danger mt-1">
+            Este campo debe poseer como máximo {{ nombreMaxLength }} caracteres
+          </div>
+        </field-messages>
+      </validate>
+      <br>
+
+      <!--   Campo edad   -->
+      <validate tag="div">
+        <label for="edad">Edad</label>
+        <input 
+          placeholder="Ingrese su edad"
+          type="number"
+          id="edad"
+          v-model.number="formData.edad"
+          name="edad" 
+          class="form-control"
+          autocomplete="off"
+          required 
+          :min="edadMin"
+          :max="edadMax"
+        />
+        <!-- Mensajes de validación del campo edad -->
+        <field-messages name="edad" show="$dirty">
+          <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
+          <div slot="min" class="alert alert-danger mt-1">
+            La edad mínima permitida es de {{ edadMin }} años.
+          </div>
+          <div slot="max" class="alert alert-danger mt-1">
+            La edad máxima permitida es de {{ edadMax }} años.
+          </div>
+        </field-messages>
+      </validate>
+      <br>
+      
+      <!--   Campo email   -->
+      <validate tag="div">
+        <label for="email">Email</label>
+        <input 
+          placeholder="Ingrese su Email"
+          type="email"
+          id="email"
+          v-model.number="formData.email"
+          name="email" 
+          class="form-control"
+          autocomplete="off"
+          required 
+        />
+        <!-- Mensajes de validación del campo email -->
+        <field-messages name="email" show="$dirty">
+          <div slot="required" class="alert alert-danger mt-1">Campo requerido</div>
+          <div slot="email" class="alert alert-danger mt-1">Email no válido</div>
+        </field-messages>
+      </validate>
+      <br>
+
+      <button class="btn btn-success my-3" :disabled="formState.$invalid" type="submit">Enviar</button>
+    </vue-form>
+
+    <h3>Previsualización de Datos Cargados</h3>
+    <table class="table mt-5">
+      <tr>
+        <tr>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Email</th>
+        </tr>
+      </tr>
+      <tr>
+        <td> {{ formData.nombre }}</td>
+        <td> {{ formData.edad }}</td>
+        <td> {{ formData.email }}</td>
+      </tr>
+      <tr v-for="(dato,index) in datos" :key="index" >
+        <td>{{ dato.nombre }}</td>
+        <td>{{ dato.edad }}</td>
+        <td>{{ dato.email }}</td>
+      </tr>
+    </table>
+
+  </div>
+</section>
+

@@ -1,0 +1,19 @@
+.src-componentes-formulario-av {
+
+}
+.jumbotron {
+    background-color: rgb(247, 239, 245);
+    color: rgb(0, 0, 0);
+}
+label{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+hr{
+    background-color: rgb(0, 0, 0);
+}
+
+td{
+    color: rgb(6, 17, 17); 
+}
